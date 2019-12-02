@@ -117,6 +117,19 @@ const paintListOfFavorites = () => {
   }
 };
 
+//Function to delete all favorites
+const handledeleteFavorites = event => {
+  event.preventDefault();
+  favoritesShows = [];
+  //Delete data from LS
+  localStorage.setItem('resultFav', JSON.stringify(favoritesShows));
+  deleteShows();
+  paintCardsShow();
+  listenFavoriteShow();
+};
+const buttonDeleteEl = document.querySelector('.js-button--delete');
+buttonDeleteEl.addEventListener('click', handledeleteFavorites);
+
 //Function to get information from server
 const getShowInformation = event => {
   event.preventDefault();
