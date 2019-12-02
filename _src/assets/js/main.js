@@ -96,6 +96,11 @@ const paintListOfFavorites = () => {
 
     const liFavElement = document.createElement('li');
 
+    const iconFavElement = document.createElement('i');
+    iconFavElement.classList.add('delete--icon');
+    iconFavElement.classList.add('fas');
+    iconFavElement.classList.add('fa-times-circle');
+
     const imgFavElement = document.createElement('img');
     imgFavElement.setAttribute('src', favImg);
     imgFavElement.setAttribute('alt', 'Imagen de la serie');
@@ -106,6 +111,7 @@ const paintListOfFavorites = () => {
 
     liFavElement.appendChild(imgFavElement);
     liFavElement.appendChild(titleFavElement);
+    liFavElement.appendChild(iconFavElement);
     const ulFavoriteElement = document.querySelector('.js-showListFavorties');
     ulFavoriteElement.appendChild(liFavElement);
   }
