@@ -1,0 +1,46 @@
+.page__main {
+  display: flex;
+}
+
+.container__main {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 60%;
+  align-items: center;
+}
+
+.form__main {
+  padding: 20px 0;
+}
+
+.main__input {
+  border-bottom: 2px;
+  padding: 10px;
+}
+
+.main__button {
+  background-color: rgb(99, 7, 7);
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 5px;
+  border: none;
+}
+
+.section__list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 40%;
+  list-style: none;
+  justify-content: center;
+  margin-left: 5px;
+}
+
+.li__card {
+  background-color: #fabada;
+}
+
+.showList--favorite {
+  background-color: tomato;
+  color: #ffffff;
+}
