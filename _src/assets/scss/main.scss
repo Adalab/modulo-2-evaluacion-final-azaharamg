@@ -1,14 +1,11 @@
-@import "core/settings";
-@import "core/links";
+@import "core/header";
+@import "core/mainsection";
 
-body {
-  background: url("../images/logo-adalab-80px.png") center center no-repeat
-    $color-white;
-  margin: 0;
-  height: 100vh;
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
-.showList--favorite {
-  background-color: tomato;
-  color: #ffffff;
+body {
+  padding: 30px;
 }
