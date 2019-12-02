@@ -4,24 +4,7 @@ let searchShows = [];
 let imageShow = "";
 let favoritesShows = [];
 
-/*const paintFavorites = () => {
-  let favId = "";
-  let showID = " ";
-
-  for (let index = 0; index < searchShows.length; index++) {
-    const element = searchShows[index];
-    showID = element.show.id;
-  }
-  for (const item of favoritesShows) {
-    favId = item;
-  }
-  if (favId === showID) {
-    console.log("YEP");
-  } else {
-    console.log("WHATT");
-  }
-};*/
-
+//Function to paint the result of a search
 const paintCardsShow = () => {
   for (let index = 0; index < searchShows.length; index++) {
     const searchShow = searchShows[index];
@@ -34,7 +17,6 @@ const paintCardsShow = () => {
 
     const liEl = document.createElement("li");
     liEl.classList.add("li__card");
-    //liEl.style.backgroundColor = "#fabada";
     liEl.style.padding = "10px";
     liEl.style.margin = "5px";
     liEl.setAttribute("id", searchShow.show.id);
@@ -89,30 +71,39 @@ const paintCardsShow = () => {
   }
 };*/
 
-//Handle function to select favorite shows
+//Handle function to select favorite shows by user
 const selectFavoriteShow = event => {
   const selectedShow = parseInt(event.currentTarget.id);
-  const selectedIndex = favoritesShows.indexOf(selectedShow);
-  if (favoritesShows.indexOf(selectedShow) !== -1) {
+  //const selectedIndex = favoritesShows.indexOf(selectedShow);
+
+  /*if (favoritesShows.indexOf(selectedShow) !== -1) {
     favoritesShows.splice(selectedIndex, 1);
-  } else {
-    for (const element of searchShows) {
-      if (element.show.id === selectedShow) {
+  } else {}*/
+  let elementExistsInFav = false;
+  for (const favoriteShow of favoritesShows) {
+    if (favoriteShow.show.id === selectedShow) {
+      elementExistsInFav = true;
+    }
+  }
+  for (const element of searchShows) {
+    if (element.show.id === selectedShow) {
+      if (elementExistsInFav === false) {
         favoritesShows.push(element);
       }
     }
   }
 
   localStorage.setItem("resultFav", JSON.stringify(favoritesShows));
-  console.log(favoritesShows);
+
   deleteShows();
   paintCardsShow();
   listenFavoriteShow();
-  //paintFavorites();
-  //Paint in favorite list shows
+
+  //Call function to paint elements in a favorite list section
   PaintListOfFavorites();
 };
 
+//Function to listen when the user click the button search
 const listenFavoriteShow = () => {
   const showItems = document.querySelectorAll("li");
   for (const showItem of showItems) {
@@ -120,7 +111,7 @@ const listenFavoriteShow = () => {
   }
 };
 
-//Delete function to avoid duplicate results
+//Function to delete, it is useful to avoid duplicate results
 const deleteShows = () => {
   const showItems = document.querySelectorAll("li");
   for (const showItem of showItems) {
@@ -128,7 +119,7 @@ const deleteShows = () => {
   }
 };
 
-//List favorites shows in another list
+//Function to paint the list of favorites in a section
 const PaintListOfFavorites = () => {
   for (const favoriteShow of favoritesShows) {
     const favName = favoriteShow.show.name;
@@ -151,6 +142,7 @@ const PaintListOfFavorites = () => {
   }
 };
 
+//Function to get information from server
 const getShowInformation = event => {
   event.preventDefault();
   const inputEl = document.querySelector(".js-userInput");
@@ -172,7 +164,7 @@ const getShowInformation = event => {
 const buttonEl = document.querySelector(".js-button");
 buttonEl.addEventListener("click", getShowInformation);
 
-//When the web start
+//Function to start the web
 const getDataFromLS = () => {
   let valueFromServer = JSON.parse(localStorage.getItem("resultShows"));
   let valueFavFromServer = JSON.parse(localStorage.getItem("resultFav"));
