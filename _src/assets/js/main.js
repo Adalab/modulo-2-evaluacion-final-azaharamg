@@ -2,9 +2,44 @@
 
 let searchShows = [];
 let imageShow = "";
+let favoritesShows = [];
 
 const paintCardsShow = () => {
-  for (const searchShow of searchShows) {
+  for (let index = 0; index < searchShows.length; index++) {
+    const searchShow = searchShows[index];
+    const titleShow = searchShow.show.name;
+    if (searchShow.show.image === null) {
+      imageShow = "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
+    } else {
+      imageShow = searchShow.show.image.medium;
+    }
+
+    const divEl = document.createElement("div");
+
+    const liEl = document.createElement("li");
+    liEl.setAttribute("id", index);
+
+    const imgEl = document.createElement("img");
+    imgEl.setAttribute("src", imageShow);
+    imgEl.setAttribute("alt", "cartel de la serie");
+
+    const titleEl = document.createElement("h3");
+    const titleText = document.createTextNode(titleShow);
+    titleEl.appendChild(titleText);
+
+    if (favoritesShows.indexOf(index) !== -1) {
+      liEl.classList.add("showList--favorite");
+    }
+
+    const ulEl = document.querySelector(".js-showList");
+    ulEl.appendChild(divEl);
+    divEl.appendChild(liEl);
+    liEl.appendChild(imgEl);
+    liEl.appendChild(titleEl);
+  }
+};
+
+/*for (const searchShow of searchShows) {
     const titleShow = searchShow.show.name;
     if (searchShow.show.image.medium === null) {
       imageShow = "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
@@ -32,6 +67,36 @@ const paintCardsShow = () => {
     liEl.appendChild(imgEl);
     liEl.appendChild(titleEl);
   }
+};*/
+
+//Handle function to select favorite shows
+const selectFavoriteShow = event => {
+  const selectedShow = parseInt(event.currentTarget.id);
+  console.log(selectedShow);
+  const selectedIndex = favoritesShows.indexOf(selectedShow);
+  if (favoritesShows.indexOf(selectedShow) !== -1) {
+    favoritesShows.splice(selectedIndex, 1);
+  } else {
+    favoritesShows.push(selectedShow);
+  }
+  deleteShows();
+  paintCardsShow();
+  listenFavoriteShow();
+};
+
+const listenFavoriteShow = () => {
+  const showItems = document.querySelectorAll("li");
+  for (const showItem of showItems) {
+    showItem.addEventListener("click", selectFavoriteShow);
+  }
+};
+
+//Delete function to avoid duplicate results
+const deleteShows = () => {
+  const showItems = document.querySelectorAll("li");
+  for (const showItem of showItems) {
+    showItem.remove();
+  }
 };
 
 const getShowInformation = event => {
@@ -43,8 +108,11 @@ const getShowInformation = event => {
     .then(data => {
       searchShows = data;
 
+      deleteShows();
       paintCardsShow();
-    });
+      listenFavoriteShow();
+    })
+    .catch(error => console.log(`Hay un error, ${error}`));
 };
 const buttonEl = document.querySelector(".js-button");
 buttonEl.addEventListener("click", getShowInformation);
