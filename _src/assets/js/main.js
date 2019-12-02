@@ -163,9 +163,12 @@ const buttonEl = document.querySelector(".js-button");
 buttonEl.addEventListener("click", getShowInformation);
 
 //When the web start
-let valueFromServer = JSON.parse(localStorage.getItem("resultShows"));
-if (valueFromServer !== null) {
-  searchShows = valueFromServer;
-  paintCardsShow();
-  listenFavoriteShow();
-}
+const getDataFromLS = () => {
+  let valueFromServer = JSON.parse(localStorage.getItem("resultShows"));
+  if (valueFromServer !== null) {
+    searchShows = valueFromServer;
+    paintCardsShow();
+    listenFavoriteShow();
+  }
+};
+getDataFromLS();
