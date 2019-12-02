@@ -14,16 +14,14 @@ const paintCardsShow = () => {
       imageShow = searchShow.show.image.medium;
     }
 
-    const divEl = document.createElement("div");
-
     const liEl = document.createElement("li");
-    liEl.setAttribute("id", index);
+    liEl.setAttribute("id", searchShow.show.id);
 
     const imgEl = document.createElement("img");
     imgEl.setAttribute("src", imageShow);
     imgEl.setAttribute("alt", "cartel de la serie");
 
-    const titleEl = document.createElement("h3");
+    const titleEl = document.createElement("h2");
     const titleText = document.createTextNode(titleShow);
     titleEl.appendChild(titleText);
 
@@ -32,8 +30,7 @@ const paintCardsShow = () => {
     }
 
     const ulEl = document.querySelector(".js-showList");
-    ulEl.appendChild(divEl);
-    divEl.appendChild(liEl);
+    ulEl.appendChild(liEl);
     liEl.appendChild(imgEl);
     liEl.appendChild(titleEl);
   }
@@ -71,8 +68,12 @@ const paintCardsShow = () => {
 
 //Handle function to select favorite shows
 const selectFavoriteShow = event => {
+  /*const selectedShow = {
+    id: parseInt(event.currentTarget.id),
+    title: 
+    image:
+  }*/
   const selectedShow = parseInt(event.currentTarget.id);
-  console.log(selectedShow);
   const selectedIndex = favoritesShows.indexOf(selectedShow);
   if (favoritesShows.indexOf(selectedShow) !== -1) {
     favoritesShows.splice(selectedIndex, 1);
@@ -82,6 +83,8 @@ const selectFavoriteShow = event => {
   deleteShows();
   paintCardsShow();
   listenFavoriteShow();
+  /*Paint in favorite list shows
+  PaintListOfFavorites();*/
 };
 
 const listenFavoriteShow = () => {
@@ -99,6 +102,31 @@ const deleteShows = () => {
   }
 };
 
+/*List favorites shows in another list
+const PaintListOfFavorites = () => {
+  for (const favoriteShow of favoritesShows) {
+    console.log(favoriteShow); //139
+Almacenar datos en un objeto, y solo tengo el id???????????????????
+    const favName = searchShows[favoriteShow].show.name;
+    const favImg = searchShows[favoriteShow].show.image.medium;
+
+    const liFavElement = document.createElement("li");
+
+    const imgFavElement = document.createElement("img");
+    imgFavElement.setAttribute("src", favImg);
+    imgFavElement.setAttribute("alt", "Imagen de la serie");
+
+    const titleFavElement = document.createElement("h3");
+    const titleFavText = document.createTextNode(favName);
+    titleFavElement.appendChild(titleFavText);
+
+    liFavElement.appendChild(imgFavElement);
+    liFavElement.appendChild(titleFavElement);
+    const ulFavoriteElement = document.querySelector(".js-showListFavorties");
+    ulFavoriteElement.appendChild(liFavElement);
+  }
+};*/
+
 const getShowInformation = event => {
   event.preventDefault();
   const inputEl = document.querySelector(".js-userInput");
@@ -111,8 +139,16 @@ const getShowInformation = event => {
       deleteShows();
       paintCardsShow();
       listenFavoriteShow();
+      //LocalStorage
+      localStorage.setItem("resultShows", JSON.stringify(searchShows));
     })
     .catch(error => console.log(`Hay un error, ${error}`));
 };
 const buttonEl = document.querySelector(".js-button");
 buttonEl.addEventListener("click", getShowInformation);
+
+//When the web start
+let valueFromServer = JSON.parse(localStorage.getItem("resultShows"));
+if (valueFromServer !== null) {
+  searchShows = valueFromServer;
+}
