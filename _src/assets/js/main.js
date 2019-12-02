@@ -33,6 +33,10 @@ const paintCardsShow = () => {
     }
 
     const liEl = document.createElement("li");
+    liEl.classList.add("li__card");
+    //liEl.style.backgroundColor = "#fabada";
+    liEl.style.padding = "10px";
+    liEl.style.margin = "5px";
     liEl.setAttribute("id", searchShow.show.id);
 
     const imgEl = document.createElement("img");
@@ -44,6 +48,7 @@ const paintCardsShow = () => {
     titleEl.appendChild(titleText);
 
     if (favoritesShows.indexOf(searchShow.show.id) !== -1) {
+      liEl.classList.remove("li__card");
       liEl.classList.add("showList--favorite");
     }
 
