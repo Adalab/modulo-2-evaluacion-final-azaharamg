@@ -96,15 +96,21 @@ const selectFavoriteShow = event => {
   if (favoritesShows.indexOf(selectedShow) !== -1) {
     favoritesShows.splice(selectedIndex, 1);
   } else {
-    favoritesShows.push(selectedShow);
+    for (const element of searchShows) {
+      if (element.show.id === selectedShow) {
+        favoritesShows.push(element);
+      }
+    }
   }
+
+  localStorage.setItem("resultFav", JSON.stringify(favoritesShows));
   console.log(favoritesShows);
   deleteShows();
   paintCardsShow();
   listenFavoriteShow();
   //paintFavorites();
-  /*Paint in favorite list shows
-  PaintListOfFavorites();*/
+  //Paint in favorite list shows
+  PaintListOfFavorites();
 };
 
 const listenFavoriteShow = () => {
@@ -122,13 +128,11 @@ const deleteShows = () => {
   }
 };
 
-/*List favorites shows in another list
+//List favorites shows in another list
 const PaintListOfFavorites = () => {
   for (const favoriteShow of favoritesShows) {
-    console.log(favoriteShow); //139
-Almacenar datos en un objeto, y solo tengo el id???????????????????
-    const favName = searchShows[favoriteShow].show.name;
-    const favImg = searchShows[favoriteShow].show.image.medium;
+    const favName = favoriteShow.show.name;
+    const favImg = favoriteShow.show.image.medium;
 
     const liFavElement = document.createElement("li");
 
@@ -145,7 +149,7 @@ Almacenar datos en un objeto, y solo tengo el id???????????????????
     const ulFavoriteElement = document.querySelector(".js-showListFavorties");
     ulFavoriteElement.appendChild(liFavElement);
   }
-};*/
+};
 
 const getShowInformation = event => {
   event.preventDefault();
@@ -159,6 +163,7 @@ const getShowInformation = event => {
       deleteShows();
       paintCardsShow();
       listenFavoriteShow();
+      PaintListOfFavorites();
       //LocalStorage
       localStorage.setItem("resultShows", JSON.stringify(searchShows));
     })
@@ -170,10 +175,17 @@ buttonEl.addEventListener("click", getShowInformation);
 //When the web start
 const getDataFromLS = () => {
   let valueFromServer = JSON.parse(localStorage.getItem("resultShows"));
+  let valueFavFromServer = JSON.parse(localStorage.getItem("resultFav"));
   if (valueFromServer !== null) {
     searchShows = valueFromServer;
     paintCardsShow();
     listenFavoriteShow();
+  }
+  if (valueFavFromServer !== null) {
+    favoritesShows = valueFavFromServer;
+    paintCardsShow();
+    listenFavoriteShow();
+    PaintListOfFavorites();
   }
 };
 getDataFromLS();
