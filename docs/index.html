@@ -5,19 +5,38 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Adalab Web Starter Kit</title>
-        <link rel="icon" href="./favicon.png" />
-        <link rel="stylesheet" href="./assets/css/main.css" />
+        <title>Buscador de series</title>
+        <link rel="stylesheet" href="./assets/css/main.css"
+        />
     </head>
     
     <body>
         <div class="page">
-            <header class="page__header">Header</header>
-            <main class="page__main">Main</main> <a class="link__adalab" href="https://adalab.es" target="_blank">Adalab</a>
+            <header class="page__header">
+                 <h1>Buscador de series</h1>
 
-            <a
-            class="link__github" href="https://github.com" target="_blank">GitHub</a>
+            </header>
+            <main class="page__main">
+                <div class="container__main">
+                    <form class="form__main">
+                        <label for="title">
+                            <input class="main__input js-userInput" type="text" name="showTitle" id="title"
+                            placeholder="Introduce una serie...">
+                        </label>
+                        <button class="main__button js-button">Search</button>
+                    </form>
+                    <aside>
+                         <h2 class="aside__title">Mis series favoritas</h2>
+
+                        <ul class="js-showListFavorties"></ul>
+                    </aside>
+                </div>
+                <section>
+                    <ul class="section__list js-showList"></ul>
+                </section>
+            </main>
         </div>
+        <script type="text/javascript" src="./assets/js/main.js"></script>
     </body>
 
 </html>
