@@ -86,8 +86,13 @@ const deleteShows = () => {
 //Function to paint the list of favorites in a section
 const paintListOfFavorites = () => {
   for (const favoriteShow of favoritesShows) {
+    let favImg = '';
+    if (favoriteShow.show.image === null) {
+      favImg = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+    } else {
+      favImg = favoriteShow.show.image.medium;
+    }
     const favName = favoriteShow.show.name;
-    const favImg = favoriteShow.show.image.medium;
 
     const liFavElement = document.createElement('li');
 
