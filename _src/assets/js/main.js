@@ -4,6 +4,24 @@ let searchShows = [];
 let imageShow = "";
 let favoritesShows = [];
 
+/*const paintFavorites = () => {
+  let favId = "";
+  let showID = " ";
+
+  for (let index = 0; index < searchShows.length; index++) {
+    const element = searchShows[index];
+    showID = element.show.id;
+  }
+  for (const item of favoritesShows) {
+    favId = item;
+  }
+  if (favId === showID) {
+    console.log("YEP");
+  } else {
+    console.log("WHATT");
+  }
+};*/
+
 const paintCardsShow = () => {
   for (let index = 0; index < searchShows.length; index++) {
     const searchShow = searchShows[index];
@@ -68,11 +86,6 @@ const paintCardsShow = () => {
 
 //Handle function to select favorite shows
 const selectFavoriteShow = event => {
-  /*const selectedShow = {
-    id: parseInt(event.currentTarget.id),
-    title: 
-    image:
-  }*/
   const selectedShow = parseInt(event.currentTarget.id);
   const selectedIndex = favoritesShows.indexOf(selectedShow);
   if (favoritesShows.indexOf(selectedShow) !== -1) {
@@ -80,9 +93,11 @@ const selectFavoriteShow = event => {
   } else {
     favoritesShows.push(selectedShow);
   }
+  console.log(favoritesShows);
   deleteShows();
   paintCardsShow();
   listenFavoriteShow();
+  //paintFavorites();
   /*Paint in favorite list shows
   PaintListOfFavorites();*/
 };
@@ -151,4 +166,6 @@ buttonEl.addEventListener("click", getShowInformation);
 let valueFromServer = JSON.parse(localStorage.getItem("resultShows"));
 if (valueFromServer !== null) {
   searchShows = valueFromServer;
+  paintCardsShow();
+  listenFavoriteShow();
 }
