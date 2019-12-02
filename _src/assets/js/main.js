@@ -25,7 +25,7 @@ const paintCardsShow = () => {
     const titleText = document.createTextNode(titleShow);
     titleEl.appendChild(titleText);
 
-    if (favoritesShows.indexOf(index) !== -1) {
+    if (favoritesShows.indexOf(searchShow.show.id) !== -1) {
       liEl.classList.add("showList--favorite");
     }
 
