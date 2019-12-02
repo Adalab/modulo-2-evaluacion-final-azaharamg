@@ -1,32 +1,28 @@
 <main class="page__main">
-  <h1>Buscador de series</h1>
-  <form>
-    <label for="title">
-      <input class="js-userInput" type="text" name="showTitle" id="title">
-    </label>
-    <button class="js-button">Search</button>
-  </form>
+  <div class="container__main">
+    <form class="form__main">
+      <label for="title">
+        <input class="main__input js-userInput" type="text" name="showTitle" id="title"
+          placeholder="Introduce una serie...">
+      </label>
+      <button class="main__button js-button">Search</button>
+    </form>
+    <aside>
+      <h2 class="aside__title">Mis series favoritas</h2>
+      <ul class="js-showListFavorties">
+        <!--
+                <li>
+                  <img src="AQUI VA EL CARTEL" alt="">
+                  <h3>AQUI VA EL TITULO</h3>
+                </li>
+              -->
+      </ul>
+    </aside>
+  </div>
+
   <section>
-    <ul class="js-showList">
-      <!--
-            <li>
-              <img src="AQUI VA EL CARTEL" alt="">
-              <h2>AQUI VA EL TITULO</h2>
-            </li>
-          -->
-    </ul>
+    <ul class="section__list js-showList"></ul>
   </section>
 
-  <aside>
-    <h2>Mis series favoritas</h2>
-    <ul class="js-showListFavorties">
-      <!--
-            <li>
-              <img src="AQUI VA EL CARTEL" alt="">
-              <h3>AQUI VA EL TITULO</h3>
-            </li>
-          -->
-    </ul>
-  </aside>
 
 </main>
