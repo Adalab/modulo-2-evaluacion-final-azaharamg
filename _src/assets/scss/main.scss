@@ -1,5 +1,5 @@
-@import "core/header";
-@import "core/mainsection";
+@import 'core/header';
+@import 'core/mainsection';
 
 * {
   margin: 0px;
@@ -8,4 +8,6 @@
 
 body {
   padding: 30px;
+  font-family: 'Solway', serif;
+  background-image: linear-gradient(to bottom right, rgb(202, 221, 210), rgb(9, 104, 59));
 }
