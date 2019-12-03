@@ -44,18 +44,22 @@ const paintCardsShow = () => {
 const selectFavoriteShow = event => {
   event.preventDefault();
   const selectedShow = parseInt(event.currentTarget.id);
-  let elementExistsInFav = false;
-  for (const favoriteShow of favoritesShows) {
-    if (favoriteShow.show.id === selectedShow) {
-      elementExistsInFav = true;
+  let indexElement = -1;
+  for (let i = 0; i < favoritesShows.length; i++) {
+    if (favoritesShows[i].show.id === selectedShow) {
+      indexElement = i;
     }
   }
+  let myShow;
   for (const element of searchShows) {
     if (element.show.id === selectedShow) {
-      if (elementExistsInFav === false) {
-        favoritesShows.push(element);
-      }
+      myShow = element;
     }
+  }
+  if (indexElement === -1) {
+    favoritesShows.push(myShow);
+  } else {
+    favoritesShows.splice(indexElement, 1);
   }
 
   localStorage.setItem('resultFav', JSON.stringify(favoritesShows));
