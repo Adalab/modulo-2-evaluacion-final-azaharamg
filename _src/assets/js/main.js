@@ -79,6 +79,14 @@ const listenFavoriteShow = () => {
   }
 };
 
+//Function to delete favorite by icon
+const iconListen = () => {
+  const iconElements = document.querySelectorAll('.delete--icon');
+  for (const iconElement of iconElements) {
+    iconElement.addEventListener('click', selectFavoriteShow);
+  }
+};
+
 //Function to delete, it is useful to avoid duplicate results
 const deleteShows = () => {
   const showItems = document.querySelectorAll('li');
@@ -97,11 +105,13 @@ const paintListOfFavorites = () => {
       favImg = favoriteShow.show.image.medium;
     }
     const favName = favoriteShow.show.name;
+    const favId = favoriteShow.show.id;
 
     const liFavElement = document.createElement('li');
     liFavElement.classList.add('item__favorite');
 
     const iconFavElement = document.createElement('i');
+    iconFavElement.setAttribute('id', favId);
     iconFavElement.classList.add('delete--icon');
     iconFavElement.classList.add('fas');
     iconFavElement.classList.add('fa-times-circle');
@@ -121,6 +131,7 @@ const paintListOfFavorites = () => {
     const ulFavoriteElement = document.querySelector('.js-showListFavorties');
     ulFavoriteElement.appendChild(liFavElement);
   }
+  iconListen();
 };
 
 //Function to delete all favorites
