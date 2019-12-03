@@ -18,13 +18,15 @@
   padding: 10px;
 }
 
-.main__button {
+.main__button,
+.button--delete {
   background-color: rgb(99, 7, 7);
   color: white;
   font-weight: bold;
   padding: 12px;
   border-radius: 5px;
   border: none;
+  margin-top: 15px;
 }
 
 .section__list {
@@ -45,4 +47,23 @@
 .showList--favorite {
   background-color: tomato;
   color: #ffffff;
+}
+
+.showListFavorties {
+  list-style: none;
+}
+
+.item__favorite {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.img__favorite {
+  width: 80px;
+  margin: 10px;
+}
+
+.delete--icon {
+  margin-left: 10px;
 }

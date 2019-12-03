@@ -95,6 +95,7 @@ const paintListOfFavorites = () => {
     const favName = favoriteShow.show.name;
 
     const liFavElement = document.createElement('li');
+    liFavElement.classList.add('item__favorite');
 
     const iconFavElement = document.createElement('i');
     iconFavElement.classList.add('delete--icon');
@@ -102,6 +103,7 @@ const paintListOfFavorites = () => {
     iconFavElement.classList.add('fa-times-circle');
 
     const imgFavElement = document.createElement('img');
+    imgFavElement.classList.add('img__favorite');
     imgFavElement.setAttribute('src', favImg);
     imgFavElement.setAttribute('alt', 'Imagen de la serie');
 
