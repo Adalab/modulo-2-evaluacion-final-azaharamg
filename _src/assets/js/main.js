@@ -33,10 +33,32 @@ const paintCardsShow = () => {
       }
     });
 
+    const genreEl = document.createElement('p');
+    const genreText = document.createTextNode(searchShow.show.genres);
+    genreEl.appendChild(genreText);
+
     const ulEl = document.querySelector('.js-showList');
     ulEl.appendChild(liEl);
     liEl.appendChild(imgEl);
     liEl.appendChild(titleEl);
+    liEl.appendChild(genreEl);
+  }
+};
+
+//Function eval
+const showLog = event => {
+  const idSelected = parseInt(event.currentTarget.id);
+  for (const item of searchShows) {
+    if (item.show.id === idSelected) {
+      console.log(item.show.name);
+    }
+  }
+};
+
+const listenShowResults = () => {
+  const showItems = document.querySelectorAll('li');
+  for (const showItem of showItems) {
+    showItem.addEventListener('click', showLog);
   }
 };
 
@@ -161,6 +183,7 @@ const getShowInformation = event => {
       paintCardsShow();
       listenFavoriteShow();
       paintListOfFavorites();
+      listenShowResults();
     })
     .catch(error => console.log(`Hay un error, ${error}`));
 };
